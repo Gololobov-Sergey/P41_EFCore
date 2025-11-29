@@ -14,7 +14,7 @@ namespace CodeFirst.Models
         public DateOnly DateOfBirth { get; set; }
         public decimal Scholarship { get; set; }
 
-
+        public Group Group { get; set; }
 
         public override string ToString()
         {

@@ -1,4 +1,6 @@
-﻿namespace CodeFirst
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace CodeFirst
 {
     internal class Program
     {
@@ -7,10 +9,12 @@
             
             using(var context = new StudentDBContext())
             {
-                var students = context.Students.ToList();
+                var students = context.Students
+                    .Include(s=>s.Group)
+                    .ToList();
                 foreach (var student in students)
                 {
-                    Console.WriteLine(student);
+                    Console.WriteLine($"Student: {student.Name}, Group: {student.Group.Name}");
                 }
             }
 
