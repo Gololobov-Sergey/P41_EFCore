@@ -54,16 +54,52 @@ namespace Students
             //modelBuilder.Entity<Models.Student>().ToTable(t => t.HasCheckConstraint("CK_Student_FirstName", "FirstName <> ''"));
             //modelBuilder.Entity<Student>().Property(s => s.LastName).HasMaxLength(100);
 
+
+            //modelBuilder.Entity<Models.Student>()
+            //    .HasOne<Models.Group>(s => s.Group)
+            //    .WithMany(g => g.Students)
+            //    .HasForeignKey(s => s.GroupId987)
+            //    .OnDelete(DeleteBehavior.Cascade);
+
+            //modelBuilder.Entity<Models.StudInfo>()
+            //    .HasOne<Models.Student>(si => si.Student)
+            //    .WithOne(s => s.StudInfo)
+            //    .HasForeignKey<Models.StudInfo>(si => si.Id);
+
+
+            //modelBuilder.Entity<Subject>()
+            //    .HasMany(s => s.Students)
+            //    .WithMany(s => s.Subjects)
+            //    .UsingEntity<StudentSubject>(
+            //        j => j
+            //            .HasOne<Student>()
+            //            .WithMany()
+            //            .HasForeignKey("StudentId")
+            //            .HasConstraintName("FK_StudentSubject_Student")
+            //            .OnDelete(DeleteBehavior.Cascade),
+            //        j => j
+            //            .HasOne<Subject>()
+            //            .WithMany()
+            //            .HasForeignKey("SubjectId")
+            //            .HasConstraintName("FK_StudentSubject_Subject")
+            //            .OnDelete(DeleteBehavior.ClientCascade));
+
             modelBuilder.Entity<Models.Group>().HasData(
                 new Models.Group { Id = 1, Name = "Group A" },
                 new Models.Group { Id = 2, Name = "Group B" }
             );
 
 
+            modelBuilder.Entity<Models.StudInfo>().HasData(
+                new Models.StudInfo { Id = 1, Login = "ivanov", HashPassword = "ivanov123" },
+                new Models.StudInfo { Id = 2, Login = "petrov", HashPassword = "petrov123" },
+                new Models.StudInfo { Id = 3, Login = "sidorov", HashPassword = "sidorov123" }
+            );
+
             modelBuilder.Entity<Models.Student>().HasData(
-                new Models.Student { Id = 1, FirstName = "Ivan", LastName = "Ivanov", DateOfBirth = new DateTime(2000, 1, 1), GroupId = 1 },
-                new Models.Student { Id = 2, FirstName = "Petr", LastName = "Petrov", DateOfBirth = new DateTime(2001, 2, 2), GroupId = 2 },
-                new Models.Student { Id = 3, FirstName = "Sidor", LastName = "Sidorov", DateOfBirth = new DateTime(2002, 3, 3), GroupId = 1 }
+                new Models.Student { Id = 1, FirstName = "Ivan", LastName = "Ivanov", DateOfBirth = new DateTime(2000, 1, 1), GroupId = 1, StudInfoId = 1 },
+                new Models.Student { Id = 2, FirstName = "Petr", LastName = "Petrov", DateOfBirth = new DateTime(2001, 2, 2), GroupId = 2, StudInfoId = 2 },
+                new Models.Student { Id = 3, FirstName = "Sidor", LastName = "Sidorov", DateOfBirth = new DateTime(2002, 3, 3), GroupId = 1, StudInfoId = 3 }
             );
         }
 

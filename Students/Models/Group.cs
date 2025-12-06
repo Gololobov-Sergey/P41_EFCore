@@ -17,6 +17,6 @@ namespace Students.Models
         public int Rating { get; set; }
 
 
-        public List<Student> Students { get; set; }
+        public List<Student>? Students { get; set; }
     }
 }

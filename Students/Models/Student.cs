@@ -22,13 +22,26 @@ namespace Students.Models
         public string? LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
 
+        
+
+
         public int? GroupId { get; set; }
+        //[ForeignKey("GroupId987")]
         public Group? Group { get; set; }
+
+
+        public int? StudInfoId { get; set; }
+        public StudInfo? StudInfo { get; set; }
+
+
+        //public List<Subject>? Subjects { get; set; }
+
+        public List<StudentSubject>? StudentSubjects { get; set; }
 
 
         public override string ToString()
         {
-            return $"{Id}: {FirstName} {LastName}, born on {DateOfBirth.ToShortDateString()}";
+            return $"{Id}: {FirstName} {LastName}, born on {DateOfBirth.ToShortDateString()}, Group: {Group?.Name}, Login: {StudInfo?.Login}, HashPassword: {StudInfo?.HashPassword}";
         }
     }
 }
