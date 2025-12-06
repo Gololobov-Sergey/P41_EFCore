@@ -13,8 +13,8 @@ namespace Students
     {
         public StudentDBContext()
         {
-            //Database.EnsureDeleted();
-            //Database.EnsureCreated();
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         public StudentDBContext(DbContextOptions<StudentDBContext> options)
@@ -41,8 +41,8 @@ namespace Students
 
             //modelBuilder.Entity<Models.Student>().Property("GetCode").HasField("code");
 
-            modelBuilder.Entity<Models.Student>().Property(s => s.FirstName).IsRequired();
-            modelBuilder.Entity<Models.Student>().Property(s => s.LastName).IsRequired();
+            //modelBuilder.Entity<Models.Student>().Property(s => s.FirstName).IsRequired();
+            //modelBuilder.Entity<Models.Student>().Property(s => s.LastName).IsRequired();
 
             //modelBuilder.Entity<Student>().HasKey(s => s.IdStudent);
             //modelBuilder.Entity<Student>().HasKey(s => new { s.LastName, s.FirstName});
@@ -51,13 +51,19 @@ namespace Students
             //modelBuilder.Entity<Models.Student>().Property(s => s.DateOfBirth).HasDefaultValueSql("GETDATE()");
             //modelBuilder.Entity<Models.Student>().Property(s => s.DateOfBirth).HasDefaultValue("2000-01-01");
 
-            modelBuilder.Entity<Models.Student>().ToTable(t => t.HasCheckConstraint("CK_Student_FirstName", "FirstName <> ''"));
-            modelBuilder.Entity<Student>().Property(s => s.LastName).HasMaxLength(100);
+            //modelBuilder.Entity<Models.Student>().ToTable(t => t.HasCheckConstraint("CK_Student_FirstName", "FirstName <> ''"));
+            //modelBuilder.Entity<Student>().Property(s => s.LastName).HasMaxLength(100);
+
+            modelBuilder.Entity<Models.Group>().HasData(
+                new Models.Group { Id = 1, Name = "Group A" },
+                new Models.Group { Id = 2, Name = "Group B" }
+            );
+
 
             modelBuilder.Entity<Models.Student>().HasData(
-                new Models.Student { Id = 1, FirstName = "Ivan", LastName = "Ivanov", DateOfBirth = new DateTime(2000, 1, 1) },
-                new Models.Student { Id = 2, FirstName = "Petr", LastName = "Petrov", DateOfBirth = new DateTime(2001, 2, 2) },
-                new Models.Student { Id = 3, FirstName = "Sidor", LastName = "Sidorov", DateOfBirth = new DateTime(2002, 3, 3) }
+                new Models.Student { Id = 1, FirstName = "Ivan", LastName = "Ivanov", DateOfBirth = new DateTime(2000, 1, 1), GroupId = 1 },
+                new Models.Student { Id = 2, FirstName = "Petr", LastName = "Petrov", DateOfBirth = new DateTime(2001, 2, 2), GroupId = 2 },
+                new Models.Student { Id = 3, FirstName = "Sidor", LastName = "Sidorov", DateOfBirth = new DateTime(2002, 3, 3), GroupId = 1 }
             );
         }
 

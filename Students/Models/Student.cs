@@ -16,15 +16,15 @@ namespace Students.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         //[Required]
-        [MaxLength(50)]
+        //[MaxLength(50)]
         public string? FirstName { get; set; }
         //[Required]
         public string? LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
 
-        int code;
+        public int? GroupId { get; set; }
+        public Group? Group { get; set; }
 
-        public int GetCode => code;
 
         public override string ToString()
         {
